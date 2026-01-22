@@ -56,13 +56,13 @@ services:
       - ./database:/docker-entrypoint-initdb.d
       - mysql_data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: mysql
-      MYSQL_DATABASE: root
-      MYSQL_PASSWORD: 1234
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: nuxt5
+      MYSQL_USER: user
     networks: ["app-network"]
 
 networks:
-  app-networks:
+  app-network:
     driver: bridge
 
 volumes:
