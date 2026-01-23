@@ -2,7 +2,7 @@
     <v-container>
         <c-row>
             <v-col cols="12">
-                <v-form v-if="user.status_eva === 2 || user.status_eva === 3">
+                <v-form v-if="user.status_commit === 'y'">
                     <v-h1 class="text-h5 font-weight-bold">คะแนนประเมินของกรรมการ</v-h1>
                     <v-card class="pa-2 mt-2">
                         <p>ชื่อ - นามกสุล : {{ user.first_name }} {{ user.last_name }}</p>
@@ -33,8 +33,8 @@
                         <v-card class="pa-2" color="success">คะแนนรวม : {{ user.total_commit }} คะแนน</v-card>
                     </div>
                 </v-form>
-                <v-alert v-else-if="user.status_eva === 1" type="info">คุณยังไม่ได้ประเมินตนเอง</v-alert>
-                <v-alert v-else type="warning">คุณยังไม่มีแบบประเมิน</v-alert>
+                <v-alert v-else-if="user.status_eva === 'n'" type="info">ยังไม่ได้ประเมินผู้รับการประเมิน</v-alert>
+                <v-alert v-else type="warning">ยังไม่มีแบบประเมิน</v-alert>
             </v-col>
         </c-row>
     </v-container>
