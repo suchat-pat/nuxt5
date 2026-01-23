@@ -6,7 +6,7 @@ const {verifyToken,requireRole} = require('../../middleware/authMiddleware')
 
 // ===================== DEMO =====================
 // API สำหรับ GET ข้อมูล
-// router.get('/',verifyToken,requirRole('ฝ่ายบุคลากร'),async (req,res) => {
+// router.get('/',verifyToken,requireRole('ฝ่ายบุคลากร'),async (req,res) => {
 //     try{
 //         const [rows] = await db.query(``)
 //         res.json(rows)
@@ -18,9 +18,9 @@ const {verifyToken,requireRole} = require('../../middleware/authMiddleware')
 // ===================== DEMO =====================
 
 // API สำหรับ GET ข้อมูล
-router.get('/',verifyToken,requirRole('ฝ่ายบุคลากร'),async (req,res) => {
+router.get('/',verifyToken,requireRole('ฝ่ายบุคลากร'),async (req,res) => {
     try{
-        const [rows] = await db.query(`select * from tb_indicate,tb_topic where tb_indicate.id_toic=tb_topic.id_topic order by id_indicate desc`)
+        const [rows] = await db.query(`select * from tb_indicate,tb_topic where tb_indicate.id_topic=tb_topic.id_topic order by id_indicate desc`)
         res.json(rows)
     }catch(err){
         console.error("Error Get",err)
@@ -29,7 +29,7 @@ router.get('/',verifyToken,requirRole('ฝ่ายบุคลากร'),async
 })
 
 // API สำหรับ GET ข้อมูล
-router.get('/:id_indicate',verifyToken,requirRole('ฝ่ายบุคลากร'),async (req,res) => {
+router.get('/:id_indicate',verifyToken,requireRole('ฝ่ายบุคลากร'),async (req,res) => {
     try{
         const {id_indicate} = req.params
         const [rows] = await db.query(`select * from tb_indicate where id_indicate='${id_indicate}'`)
@@ -42,7 +42,7 @@ router.get('/:id_indicate',verifyToken,requirRole('ฝ่ายบุคลา�
 })
 
 // API สำหรับ Insert ข้อมูล
-router.post('/',verifyToken,requirRole('ฝ่ายบุคลากร'),async (req,res) => {
+router.post('/',verifyToken,requireRole('ฝ่ายบุคลากร'),async (req,res) => {
     try{
         const {id_topic,name_indicate,detail_indicate,point_indicate,check_indicate} = req.body
         const [rows] = await db.query(`insert into tb_indicate (id_topic,name_indicate,detail_indicate,point_indicate,check_indicate) values (?,?,?,?,?)`,[id_topic,name_indicate,detail_indicate,point_indicate,check_indicate])
@@ -54,7 +54,7 @@ router.post('/',verifyToken,requirRole('ฝ่ายบุคลากร'),asyn
 })
 
 // API สำหรับ Update ข้อมูล
-router.put('/:id_indicate',verifyToken,requirRole('ฝ่ายบุคลากร'),async (req,res) => {
+router.put('/:id_indicate',verifyToken,requireRole('ฝ่ายบุคลากร'),async (req,res) => {
     try{
         const {id_indicate} = req.params
         const {id_topic,name_indicate,detail_indicate,point_indicate,check_indicate} = req.body
@@ -67,7 +67,7 @@ router.put('/:id_indicate',verifyToken,requirRole('ฝ่ายบุคลา�
 })
 
 // API สำหรับ GET ข้อมูล
-router.delete('/:id_indicate',verifyToken,requirRole('ฝ่ายบุคลากร'),async (req,res) => {
+router.delete('/:id_indicate',verifyToken,requireRole('ฝ่ายบุคลากร'),async (req,res) => {
     try{
         const {id_indicate} = req.params
         const [rows] = await db.query(`delete from tb_indicate where id_indicate='${id_indicate}'`)
