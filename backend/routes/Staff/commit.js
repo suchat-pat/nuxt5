@@ -49,7 +49,7 @@ router.post('/:id_eva',verifyToken,requireRole('ฝ่ายบุคลาก�
         await db.query(`delete from tb_commit where id_eva='${id_eva}'`)
         const com = req.body
         const v = com.map(c=> [id_eva,c.id_member,c.role,'n'])
-        await db.query(`insert into tb_commit (id_eva,id_member,role,status_commit) values ?`,[v])
+        await db.query(`insert into tb_commit (id_eva,id_member,level_commit,status_commit) values ?`,[v])
         res.json({message:'Success'})
     }catch(err){
         console.error("Error insert",err)

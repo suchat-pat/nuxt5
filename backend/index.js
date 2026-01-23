@@ -20,6 +20,9 @@ app.use('/api/auth',auth)
 const profile = require('./routes/profile')
 app.use('/api/profile',profile)
 
+const dash = require('./routes/dash')
+app.use('/api/dash',dash)
+
 
 // Staff
 const member = require('./routes/Staff/member')
@@ -39,6 +42,12 @@ app.use('/api/Staff/round_eva',round_eva)
 
 const commit = require('./routes/Staff/commit')
 app.use('/api/Staff/commit',commit)
+
+const status = require('./routes/Staff/status')
+app.use('/api/Staff/status',status)
+
+const doc = require('./routes/Staff/doc')
+app.use('/api/Staff/doc',doc)
 
 
 // Eva
