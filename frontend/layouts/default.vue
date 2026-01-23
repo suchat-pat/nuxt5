@@ -51,6 +51,7 @@ const roles = [
 
     //eva
     {title:'หน้าหลัก',to:'/Evaluatee/',role:'ผู้รับการประเมินผล'},
+    {title:'แก้ไขข้อมูลส่วนตัว',to:'/Evaluatee/Edit_eva',role:'ผู้รับการประเมินผล'},
 ]
 const navitem = computed(() => 
     roles.filter((item) => item.role.includes(user.value.role))
@@ -62,9 +63,8 @@ const fetchUser = async () =>{
         return await navigateTo('/',{replace:true})
     }
     try{
-        const res = await axios.get(`${api}profile`,{headers:{Authorization:`Bearer ${token}`}})
+        const res = await axios.get(`${api}/profile`,{headers:{Authorization:`Bearer ${token}`}})
         user.value = res.data
-        console.log('user:',user.value)
     }catch(err){
         console.error('Error GET User!!',err)
         localStorage.removeItem('token')
