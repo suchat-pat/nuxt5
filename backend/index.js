@@ -52,6 +52,9 @@ app.use('/api/Staff/doc',doc)
 const scoreE = require('./routes/Staff/score_member')
 app.use('/api/Staff/score_member',scoreE)
 
+const scoreC = require('./routes/Staff/detail_commit')
+app.use('/api/Staff/detail_commit',scoreC)
+
 
 // Eva
 
@@ -67,6 +70,7 @@ app.use('/api/Eva/score_member',score_member)
 
 const score_commit = require('./routes/Eva/score_commit')
 app.use('/api/Eva/score_commit',score_commit)
+
 
 //Commit
 const show_eva = require('./routes/Commit/show_eva')

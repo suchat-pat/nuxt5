@@ -42,7 +42,7 @@
 
 <script setup lang="ts">
 import axios from 'axios'
-import {commit} from '../../API/base'
+import {staff} from '../../API/base'
 
 const id_eva = useRoute().params.id_eva
 const user = ref<any>({})
@@ -51,7 +51,7 @@ const topics = ref([])
 const fetchUser = async () =>{
     try{
         const token = localStorage.getItem('token')
-        const res = await axios.get(`${commit}/detail_commit/user/${id_eva}`,{headers:{Authorization:`Bearer ${token}`}})
+        const res = await axios.get(`${staff}/detail_commit/user/${id_eva}`,{headers:{Authorization:`Bearer ${token}`}})
         user.value = res.data
         console.log('user:',user.value)
     }catch(err){
@@ -61,7 +61,7 @@ const fetchUser = async () =>{
 const fetchTopic = async () =>{
     try{
         const token = localStorage.getItem('token')
-        const res = await axios.get(`${commit}/detail_commit/indicate/${id_eva}`,{headers:{Authorization:`Bearer ${token}`}})
+        const res = await axios.get(`${staff}/detail_commit/indicate/${id_eva}`,{headers:{Authorization:`Bearer ${token}`}})
         topics.value = res.data
     }catch(err){
         console.error("Error Get User!",err)
