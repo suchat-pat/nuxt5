@@ -1,10 +1,8 @@
 <template>
-    <v-container fluid class="fill-height">
-        <v-row justify="center" align="center">
-            <v-col cols="12" md="8" lg="6">
+    <v-container fluid class="py-10">
                 <v-card>
                     <v-sheet class="pa-4" color="">
-                        <h1 class="text-h5 text-center font-weight-bold">จัดการผู้รับการประเมินผล</h1>
+                        <h1 class="text-h5 text-center font-weight-bold bg-maroon" >จัดการผู้รับการประเมินผล</h1>
                     </v-sheet>
                     <v-card-text>
                         <v-form @submit.prevent="saveMember">
@@ -15,7 +13,7 @@
                                 <v-col cols="12" md="6">
                                     <v-text-field label="นามกสุล" v-model="form.last_name" :error-messages="error.last_name"></v-text-field>
                                 </v-col>
-                                <v-col cols="12" md="6">
+                                <v-col cols="12" md="12">
                                     <v-text-field label="อีเมล" v-model="form.email" :error-messages="error.email"></v-text-field>
                                 </v-col>
                                 <v-col cols="12" md="6">
@@ -24,31 +22,24 @@
                                 <v-col cols="12" md="6">
                                     <v-text-field label="รหัสผ่าน" type="password" v-model="form.password" :error-messages="error.password"></v-text-field>
                                 </v-col>
-                                <v-col cols="12" md="6">
-                                    <v-text-field label="ยืนยันรหัสผ่าน" type="password" v-model="confirmPassword" :error-messages="error.confirmPassword"></v-text-field>
-                                </v-col>
                                 <v-col cols="12">
                                     <v-select label="เลือกประเภทสมาชิก" :items="['ฝ่ายบุคลากร','กรรมการประเมิน','ผู้รับการประเมินผล']" v-model="form.role" :error-messages="error.role"></v-select>
                                 </v-col>
-                                <v-col cols="12" class="text-center">
-                                    <v-btn type="submit" color="#7d0c14">สมัคร</v-btn>&nbsp;&nbsp;<v-btn type="reset" color="#7d0c14">ยกเลิก</v-btn>
-                                    <p class="mt-2 text-sm">มีบัญชีอยู่แล้ว? <nuxt-link to="/" class="bg-maroon">เข้าสู่ระบบ</nuxt-link></p>
-                                </v-col>
+                                <v-row>
+                                    <v-col cols="12" md="6" >
+                                       <v-btn type="submit" color="#7d0c14">สมัคร</v-btn> 
+                                    </v-col>
+                                </v-row>
                             </v-row>
                         </v-form>
                     </v-card-text>
                 </v-card>
-            </v-col>
-        </v-row>
     </v-container>
 </template>
 
 <script setup lang="ts">
 import axios from 'axios'
 import {api} from '../API/base'
-definePageMeta({
-    layout:false
-})
 const form = ref({
     first_name:'',
     last_name:'',

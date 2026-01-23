@@ -42,9 +42,9 @@ const logout = async () =>{
 
 const roles = [
     //staff
-    {title:'หน้าหลัก',to:'/Staff/',role:'ผ่ายบุคลากร'},
-    {title:'จัดการผู้รับการประเมินผล',to:'/Staff/ManageEva',role:'ผ่ายบุคลากร'},
-    {title:'จัดการกรรมการประเมิน',to:'/Staff/ManageCommit',role:'ผ่ายบุคลากร'},
+    {title:'หน้าหลัก',to:'/Staff/',role:'ฝ่ายบุคลากร'},
+    {title:'จัดการผู้รับการประเมินผล',to:'/Staff/ManageEva',role:'ฝ่ายบุคลากร'},
+    {title:'จัดการกรรมการประเมิน',to:'/Staff/ManageCommit',role:'ฝ่ายบุคลากร'},
 
     //commit
     {title:'รายชื่อผู้รับการประเมิน',to:'/Committee/',role:'กรรมการประเมิน'},
