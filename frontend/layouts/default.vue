@@ -26,6 +26,8 @@
 </template>
 
 <script setup lang="ts">
+import axios from 'axios';
+import {api} from '../API/base'
 import { useDisplay } from 'vuetify';
 const {mdAndDown} = useDisplay()
 const isMobile = computed(() => mdAndDown.value)
@@ -53,9 +55,21 @@ const navitem = computed(() =>
 )
 
 const fetchUser = async () =>{
-    
+    const token = localStorage.getItem('token')
+    if(!token){
+        return await navigateTo('/',{replace:true})
+    }
+    try{
+        const res = axios.get(`${api}profile`,{headers:{Authorization:`Bearer ${token}`}})
+        user.value = (await res).data
+    }catch(err){
+        console.error('Error GET User!!',err)
+        localStorage.removeItem('token')
+        await navigateTo('/',{replace:true})
+    }
 }
 
+onMounted(fetchUser)
 </script>
 
 <style scoped>
