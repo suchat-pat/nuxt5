@@ -54,7 +54,7 @@ router.post('/',verifyToken,requireRole('ฝ่ายบุคลากร'),asy
 })
 
 // API สำหรับ Update ข้อมูล
-router.put('/',verifyToken,requireRole('ฝ่ายบุคลากร'),async (req,res) => {
+router.put('/:id_sys',verifyToken,requireRole('ฝ่ายบุคลากร'),async (req,res) => {
     try{
         const {id_sys} = req.params
         const {day_open,day_out,round_sys,year_sys,status_sys} = req.body
