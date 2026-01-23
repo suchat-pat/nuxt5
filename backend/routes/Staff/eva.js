@@ -1,0 +1,54 @@
+const express = require('express')
+const router = express.Router()
+const db = require('../../db')
+const bc = require('bcryptjs')
+const {verifyToken,requireRole} = require('../../middleware/authMiddleware')
+
+// ===================== DEMO =====================
+// API สำหรับ GET ข้อมูล
+// router.get('/',verifyToken,requireRole('ฝ่ายบุคลากร'),async (req,res) => {
+//     try{
+//         const [rows] = await db.query(``)
+//         res.json(rows)
+//     }catch(err){
+//         console.error("Error Get",err)
+//         res.status(500).json({message:'Error Get'})
+//     }
+// })
+// ===================== DEMO =====================
+
+// API สำหรับ GET ข้อมูล
+router.get('/round',verifyToken,requireRole('ฝ่ายบุคลากร'),async (req,res) => {
+    try{
+        const [rows] = await db.query(`select * from tb_system where status_sys='y' order by id_sys desc`)
+        res.json(rows)
+    }catch(err){
+        console.error("Error Get",err)
+        res.status(500).json({message:'Error Get'})
+    }
+})
+
+// API สำหรับ GET ข้อมูล
+router.get('/',verifyToken,requireRole('ฝ่ายบุคลากร'),async (req,res) => {
+    try{
+        const [rows] = await db.query(`select * from tb_member , tb _eva , tb_system where tb_eva.id_member= tb_member.id_member and tb_system.id_sys=tb_system.id_sys and status_eva=1 order by id_eva desc`)
+        res.json(rows)
+    }catch(err){
+        console.error("Error Get",err)
+        res.status(500).json({message:'Error Get'})
+    }
+})
+
+// API สำหรับ Insert ข้อมูล
+router.post('/',verifyToken,requireRole('ฝ่ายบุคลากร'),async (req,res) => {
+    try{
+        const {id_member,id_sys,day_eva} = req.body
+        const [rows] = await db.query(`insert into tb_eva (id_member,id_sys,day_eva,status_eva) values (?,?,?,?)`,[id_member,id_sys,day_eva,1])
+        res.json(rows)
+    }catch(err){
+        console.error("Error Insert",err)
+        res.status(500).json({message:'Error Insert'})
+    }
+})
+
+module.exports = router
