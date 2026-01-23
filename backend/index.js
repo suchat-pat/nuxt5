@@ -50,5 +50,21 @@ app.use('/api/Eva/selfeva',selfeva)
 const score_member = require('./routes/Eva/score_member')
 app.use('/api/Eva/score_member',score_member)
 
+//Commit
+const show_eva = require('./routes/Commit/show_eva')
+app.use('/api/Commit/show_eva',show_eva)
+
+const detail_eva = require('./routes/Commit/detail_eva')
+app.use('/api/Commit/detail_eva',detail_eva)
+
+const save_score = require('./routes/Commit/save_score')
+app.use('/api/Commit/save_score',save_score)
+
+const detail_commit = require('./routes/Commit/detail_commit')
+app.use('/api/Commit/detail_commit',detail_commit)
+
+const check_confirm = require('./routes/Commit/check_confirm')
+app.use('/api/Commit/check_confirm',check_confirm)
+
 app.use((req,res) => res.status(404).json({message:'กำลังปรับปรุงระบบ!'}))
 app.listen(3001 , () => console.log('Server Running On Port 3001'))
