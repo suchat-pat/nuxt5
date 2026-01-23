@@ -92,7 +92,7 @@ const saveMember = async () =>{
 const fetchUser = async () =>{
     const token = localStorage.getItem('token')
     try{
-        const res = axios.get(`${eva}/edit_eva`,{headers:{Authorization:`Bearer ${token}`}})
+        const res = await axios.get(`${eva}/edit_eva`,{headers:{Authorization:`Bearer ${token}`}})
         form.value = (await res).data
     }catch(err){
         console.error('Error GET User!!',err)
