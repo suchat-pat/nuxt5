@@ -11,7 +11,7 @@
                             <v-row>
                                 <template v-for="(c,index) in List" :key="index">
                                     <v-col cols="12" md="6">
-                                        <v-select v-model="c.id_member" :items="MEMBER(index).map(c => ({title:`${fullname_commit}`,value:c.id_member}))" :label="`กรรมการคนที่ ${index+1}`"></v-select>
+                                        <v-select v-model="c.id_member" :items="MEMBER(index).map(c => ({title:`${c.fullname_commit}`,value:c.id_member}))" :label="`กรรมการคนที่ ${index+1}`"></v-select>
                                     </v-col>
                                     <v-col cols="12" md="6">
                                         <v-select v-model="c.role" :items="ROLE(index)" :label="`ตำแนห่งที่ ${index+1}`"></v-select>
@@ -106,6 +106,7 @@ const ROLE = (idx:number) => {
 const saveMember = async () =>{
     try{
         await axios.post(`${staff}/commit/${id_eva}`,List.value,{headers:{Authorization: `Bearer ${token}`}})
+        alert('ทำรายการสำเร็จ')
         await fetch()
     }catch(err){
         console.error('Error!!',err)
