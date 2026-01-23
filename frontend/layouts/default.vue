@@ -60,8 +60,9 @@ const fetchUser = async () =>{
         return await navigateTo('/',{replace:true})
     }
     try{
-        const res = axios.get(`${api}profile`,{headers:{Authorization:`Bearer ${token}`}})
-        user.value = (await res).data
+        const res = await axios.get(`${api}profile`,{headers:{Authorization:`Bearer ${token}`}})
+        user.value = res.data
+        console.log('user:',user.value)
     }catch(err){
         console.error('Error GET User!!',err)
         localStorage.removeItem('token')
