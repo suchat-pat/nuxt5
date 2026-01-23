@@ -81,7 +81,8 @@ const saveMember = async () =>{
     if(!validateForm())return
     try{
         await axios.put(`${eva}/edit_eva`,form.value,{headers:{Authorization:`Bearer ${token}`}})
-        alert('สมัครสำเร็จ')
+        alert('แก้ไขสำเร็จ')
+        localStorage.removeItem('token')
         navigateTo('/')
     }catch(err){
         console.error('Error Regis Member!!',err)
