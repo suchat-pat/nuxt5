@@ -3,7 +3,7 @@
         <c-row>
             <v-col cols="12">
                 <v-form v-if="user.status_eva === 2 || user.status_eva === 3">
-                    <v-h1 class="text-h5 font-weight-bold">แบบประเมินตนเอง</v-h1>
+                    <v-h1 class="text-h5 font-weight-bold">คะแนนประเมินตนเอง</v-h1>
                     <v-card class="pa-2 mt-2">
                         <p>ชื่อ - นามกสุล : {{ user.first_name }} {{ user.last_name }}</p>
                         <p>รอบประเมิน : {{ user.round_sys }} ปี {{ user.year_sys }}</p>

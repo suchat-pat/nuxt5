@@ -24,7 +24,7 @@
                                     <td class="text-center border">{{ items.last_name }}</td>
                                     <td class="text-center border">{{ items.day_eva }}</td>
                                     <td class="text-center border">รอบการประเมินที่ {{ items.round_sys }} ปี {{ items.year_sys }}</td>
-                                    <td class="text-center border"><v-btn class="text-white" size="small" color="blue" @click="check(items.id_eva)">ประเมิน</v-btn></td>
+                                    <td class="text-center border"><v-btn class="text-white" size="small" color="blue" @click="check(items.id_eva)">ตรวจสอบ</v-btn></td>
                                     <td class="text-center border">
                                         <v-btn v-if="items.signature" class="text-white" size="small" color="success" @click="go(items.id_eva)">ยืนยันผลแล้ว</v-btn>
                                         <v-btn v-else class="text-white" size="small" @click="go(items.id_eva)" color="blue">ยืนยันผล</v-btn>

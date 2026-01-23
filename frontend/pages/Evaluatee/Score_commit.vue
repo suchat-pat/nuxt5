@@ -3,7 +3,7 @@
         <c-row>
             <v-col cols="12">
                 <v-form v-if="user.status_eva === 2 || user.status_eva === 3">
-                    <v-h1 class="text-h5 font-weight-bold">แบบประเมินตนเอง</v-h1>
+                    <v-h1 class="text-h5 font-weight-bold">คะแนนประเมินกรรมการ</v-h1>
                     <v-card class="pa-2 mt-2">
                         <p>ชื่อ - นามกสุล : {{ user.first_name }} {{ user.last_name }}</p>
                         <p>รอบประเมิน : {{ user.round_sys }} ปี {{ user.year_sys }}</p>
@@ -38,7 +38,17 @@
                         </v-col>
                     </v-row>
                     <div class="mt-4 text-end">
-                        <v-card class="pa-2" color="success">คะแนนรวม : {{ totalScore.toFixed(2) }} คะแนน</v-card>
+                        <v-card class="pa-2" color="success">คะแนนรวมสุทธิ : {{ totalScore.toFixed(2) }} คะแนน</v-card>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <v-card class="pa-2">
+                            <v-row>
+                                <v-col cols="12" v-for="(commit,i) in commits" :key="commit.id_commit">
+                                    <p>{{ i+1 }}.{{ commit.level_commit }} : {{ commit.detail_commit || '-' }}</p>
+                                </v-col>
+                            </v-row>
+                        </v-card>
                     </div>
                 </v-form>
                 <v-alert v-else-if="user.status_eva === 1" type="info">คุณยังไม่ได้ประเมินตนเอง</v-alert>
@@ -56,11 +66,12 @@ const user = ref<any>({})
 const topics = ref([])
 const scores = ref([])
 const totalScore = ref(0)
+const commits = ref([])
 
 const fetchUser = async () =>{
     try{
         const token = localStorage.getItem('token')
-        const res = await axios.get(`${eva}/score_member/user`,{headers:{Authorization:`Bearer ${token}`}})
+        const res = await axios.get(`${eva}/score_commit/user`,{headers:{Authorization:`Bearer ${token}`}})
         user.value = res.data
     }catch(err){
         console.error("Error Get User!",err)
@@ -69,15 +80,37 @@ const fetchUser = async () =>{
 const fetchTopic = async () =>{
     try{
         const token = localStorage.getItem('token')
-        const res = await axios.get(`${eva}/score_member/indicate`,{headers:{Authorization:`Bearer ${token}`}})
+        const res = await axios.get(`${eva}/score_commit/indicate`,{headers:{Authorization:`Bearer ${token}`}})
         topics.value = res.data
     }catch(err){
         console.error("Error Get User!",err)
     }
 }
 
+const fetchCommit = async () =>{
+    try{
+        const token = localStorage.getItem('token')
+        const res = await axios.get(`${eva}/score_commit/commits`,{headers:{Authorization:`Bearer ${token}`}})
+        commits.value = res.data
+        console.log('commit:',commits.value)
+    }catch(err){
+        console.error("Error Get User!",err)
+    }
+}
+
+const fetchScore = async () =>{
+    try{
+        const token = localStorage.getItem('token')
+        const res = await axios.get(`${eva}/score_commit/scores`,{headers:{Authorization:`Bearer ${token}`}})
+        scores.value = res.data.scores
+        totalScore.value = res.data.totalScore
+    }catch(err){
+        console.error("Error Get Score!",err)
+    }
+}
+
 onMounted(async () =>{
-    await Promise.all([fetchTopic(),fetchUser()])
+    await Promise.all([fetchTopic(),fetchUser(),fetchScore(),fetchCommit()])
 })
 
 </script>
