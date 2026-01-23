@@ -37,6 +37,9 @@ app.use('/api/Staff/eva',eva)
 const round_eva = require('./routes/Staff/round_eva')
 app.use('/api/Staff/round_eva',round_eva)
 
+const commit = require('./routes/Staff/commit')
+app.use('/api/Staff/commit',commit)
+
 
 // Eva
 
