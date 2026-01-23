@@ -45,9 +45,7 @@
 <script setup lang="ts">
 import axios from 'axios'
 import {eva} from '../../API/base'
-definePageMeta({
-    layout:false
-})
+
 const form = ref({
     first_name:'',
     last_name:'',
@@ -93,7 +91,7 @@ const fetchUser = async () =>{
     const token = localStorage.getItem('token')
     try{
         const res = await axios.get(`${eva}/edit_eva`,{headers:{Authorization:`Bearer ${token}`}})
-        form.value = (await res).data
+        form.value = res.data
     }catch(err){
         console.error('Error GET User!!',err)
     }
