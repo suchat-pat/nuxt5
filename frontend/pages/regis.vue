@@ -46,7 +46,7 @@
 
 <script setup lang="ts">
 import axios from 'axios'
-// import {api} from '../API/api'
+import {api} from '../API/base'
 definePageMeta({
     layout:false
 })
@@ -82,7 +82,7 @@ function validateForm(){
 const saveMember = async () =>{
     if(!validateForm())return
     try{
-        await axios.post(`${api}/auth/regis`,form.value)
+        await axios.post(`${api}auth/regis`,form.value)
         alert('สมัครสำเร็จ')
         navigateTo('/')
     }catch(err){

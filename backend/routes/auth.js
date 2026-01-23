@@ -10,7 +10,7 @@ router.post('/regis',async (req,res) => {
     try{
         const {first_name,last_name,email,username,password,role} = req.body
         const hast = await bc.hash(password,10)
-        const [rows] = await db.query(`insert into tb_member (first_name,last_name,email,username,password,role) values (?,?,?,?,?,?)`,first_name,last_name,email,username,hast,role)
+        const [rows] = await db.query(`insert into tb_member (first_name,last_name,email,username,password,role) values (?,?,?,?,?,?)`,[first_name,last_name,email,username,hast,role])
         res.json({rows,message:'Insert Success!'})
     }catch(err){
         console.error('Error Insert',err)
