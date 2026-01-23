@@ -6,7 +6,7 @@ const {verifyToken,requireRole} = require('../../middleware/authMiddleware')
 
 // ===================== DEMO =====================
 // API สำหรับ GET ข้อมูล
-// router.get('/',verifyToken,requirRole('ฝ่ายบุคลากร'),async (req,res) => {
+// router.get('/',verifyToken,requireRole('ฝ่ายบุคลากร'),async (req,res) => {
 //     try{
 //         const [rows] = await db.query(``)
 //         res.json(rows)
@@ -18,7 +18,7 @@ const {verifyToken,requireRole} = require('../../middleware/authMiddleware')
 // ===================== DEMO =====================
 
 // API สำหรับ GET ข้อมูล
-router.get('/eva',verifyToken,requirRole('ฝ่ายบุคลากร'),async (req,res) => {
+router.get('/eva',verifyToken,requireRole('ฝ่ายบุคลากร'),async (req,res) => {
     try{
         const [rows] = await db.query(`select id_member,first_name,last_name,email,username,role from tb_member where role='ผู้รับการประเมินผล' order by id_member desc`)
         res.json(rows)
@@ -29,7 +29,7 @@ router.get('/eva',verifyToken,requirRole('ฝ่ายบุคลากร'),as
 })
 
 // API สำหรับ GET ข้อมูล
-router.get('/commit',verifyToken,requirRole('ฝ่ายบุคลากร'),async (req,res) => {
+router.get('/commit',verifyToken,requireRole('ฝ่ายบุคลากร'),async (req,res) => {
     try{
         const [rows] = await db.query(`select id_member,first_name,last_name,email,username,role from tb_member where role='กรรมการประเมิน' order by id_member desc`)
         res.json(rows)
@@ -40,7 +40,7 @@ router.get('/commit',verifyToken,requirRole('ฝ่ายบุคลากร')
 })
 
 // API สำหรับ GET ข้อมูล
-router.get('/all',verifyToken,requirRole('ฝ่ายบุคลากร'),async (req,res) => {
+router.get('/all',verifyToken,requireRole('ฝ่ายบุคลากร'),async (req,res) => {
     try{
         const [rows] = await db.query(`select id_member,first_name,last_name,email,username,role from tb_member order by id_member desc`)
         res.json(rows)
@@ -52,7 +52,7 @@ router.get('/all',verifyToken,requirRole('ฝ่ายบุคลากร'),as
 
 
 // API สำหรับ GET ข้อมูล
-router.get('/:id_member',verifyToken,requirRole('ฝ่ายบุคลากร'),async (req,res) => {
+router.get('/:id_member',verifyToken,requireRole('ฝ่ายบุคลากร'),async (req,res) => {
     try{
         const {id_member} = req.params
         const [rows] = await db.query(`select id_member,first_name,last_name,email,username,role from tb_member where id_member='${id_member}'`)
@@ -65,7 +65,7 @@ router.get('/:id_member',verifyToken,requirRole('ฝ่ายบุคลาก�
 })
 
 // API สำหรับ Update ข้อมูล
-router.put('/:id_member',verifyToken,requirRole('ฝ่ายบุคลากร'),async (req,res) => {
+router.put('/:id_member',verifyToken,requireRole('ฝ่ายบุคลากร'),async (req,res) => {
     try{
         const {id_member} = req.params
         const {first_name,last_name,email,username,password,role} = req.body
@@ -83,7 +83,7 @@ router.put('/:id_member',verifyToken,requirRole('ฝ่ายบุคลาก�
 })
 
 // API สำหรับ DELETE ข้อมูล
-router.delete('/:id_member',verifyToken,requirRole('ฝ่ายบุคลากร'),async (req,res) => {
+router.delete('/:id_member',verifyToken,requireRole('ฝ่ายบุคลากร'),async (req,res) => {
     try{
         const {id_member} = req.params
         const [rows] = await db.query(`delete from tb_member where id_member='${id_member}'`)
