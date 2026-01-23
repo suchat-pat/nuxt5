@@ -52,15 +52,27 @@ router.post('/',verifyToken,requireRole('ฝ่ายบุคลากร'),asy
 })
 
 // API สำหรับ Update ข้อมูล
-router.puyt('/:id_eva',verifyToken,requireRole('ฝ่ายบุคลากร'),async (req,res) => {
+router.put('/:id_eva',verifyToken,requireRole('ฝ่ายบุคลากร'),async (req,res) => {
     try{
         const {id_eva} = req.params
         const {id_member,id_sys,day_eva} = req.body
         const [rows] = await db.query(`update tb_eva set id_member=?,id_sys=?,day_eva=? where id_eva='${id_eva}'`,[id_member,id_sys,day_eva])
         res.json(rows)
     }catch(err){
-        console.error("Error Insert",err)
-        res.status(500).json({message:'Error Insert'})
+        console.error("Error Update",err)
+        res.status(500).json({message:'Error Update'})
+    }
+})
+
+// API สำหรับ Delete ข้อมูล
+router.delete('/:id_eva',verifyToken,requireRole('ฝ่ายบุคลากร'),async (req,res) => {
+    try{
+        const {id_eva} = req.params
+        const [rows] = await db.query(`delete from tb_eva where id_eva='${id_eva}'`)
+        res.json(rows)
+    }catch(err){
+        console.error("Error delete",err)
+        res.status(500).json({message:'Error delete'})
     }
 })
 
