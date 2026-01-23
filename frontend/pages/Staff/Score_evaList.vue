@@ -62,7 +62,7 @@ const bg = (status_eva:string) => {
 }
 
 const go = (id_eva:number) => {
-    navigateTo({path:`Eva_commit-${id_eva}`})
+    navigateTo({path:`ScoreEva-${id_eva}`})
 }
 
 onMounted(fetch)

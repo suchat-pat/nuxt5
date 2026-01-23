@@ -49,6 +49,9 @@ app.use('/api/Staff/status',status)
 const doc = require('./routes/Staff/doc')
 app.use('/api/Staff/doc',doc)
 
+const scoreE = require('./routes/Staff/score_member')
+app.use('/api/Staff/score_member',scoreE)
+
 
 // Eva
 

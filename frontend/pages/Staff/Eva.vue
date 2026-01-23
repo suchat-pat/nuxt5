@@ -101,7 +101,7 @@ const fetch = async () => {
         const s = await axios.get(`${staff}/eva/round`,{headers:{Authorization: `Bearer ${token}`}})
         sys.value = s.data
         
-        const res = await axios.get(`${staff}/eva`,{headers:{Authorization: `Bearer ${token}`}})
+        const res = await axios.get(`${staff}/eva/y`,{headers:{Authorization: `Bearer ${token}`}})
         result.value = res.data
     }catch(err){
         console.error('Error Fetching',err)
